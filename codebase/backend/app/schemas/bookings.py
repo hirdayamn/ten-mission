@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field, ConfigDict
 class BookingCreate(BaseModel):
     member_id: uuid.UUID
     inventory_id: uuid.UUID
-    quantity: int = Field(default=1, gt=0, le=10)
+    quantity: int = Field(default=1, gt=0, le=1)
 
 
 class BookingResponse(BaseModel):
