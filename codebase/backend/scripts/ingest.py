@@ -238,7 +238,7 @@ async def ingest_members(db: AsyncSession, fail_fast: bool = False) -> dict[str,
             chunk = to_create[i:i + batch_size]
             stmt = insert(Member).values([item.model_dump() for item in chunk])
             # Username is unique - use ON CONFLICT DO NOTHING (shouldn't happen with our logic)
-            stmt = stmt.on_conflict_do_nothing(index_elements=["username"])
+            stmt = stmt.on_conflict_do_nothing()
             result = await db.execute(stmt)
             created += result.rowcount if hasattr(result, 'rowcount') else len(chunk)
 
